@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BPC-ME | COUNTER PARTIES</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css" >
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css" >
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+
+    <% include header %>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <% include menu %>
+
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Counter Parties
+                <small>List</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Counter Parties</a></li>
+
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+
+
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Counter Parties</h3>
+                            <button type="button" id="adduser" class="btn btn-primary"> New Party</button>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="users" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Company Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Website</th>
+                                    <th>P O Box</th>
+                                    <th>Country</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <%
+                                 for(var i=0;i<parties.length;i++)
+                                 {
+                                %>
+
+                                <tr>
+                                    <td><%= parties[i].company_name %></td>
+                                    <td><%= parties[i].email %></td>
+                                    <td><%= parties[i].phone %></td>
+                                    <td><%= parties[i].website %></td>
+                                    <td><%= parties[i].p_o_box %></td>
+                                    <td><%= parties[i].country %></td>
+
+                                </tr>
+                                <%
+                                }
+
+                                 %>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Company Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Website</th>
+                                    <th>P O Box</th>
+                                    <th>Country</th>
+                                    <th>Action</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div><!-- /.box -->
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+            <div id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Add Party</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="box box-primary">
+
+                                <!-- form start -->
+                                <form role="form">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="fullname">Company Name</label>
+                                            <input type="text" class="form-control" id="comp_name" placeholder="Enter Company Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username">Email ID</label>
+                                            <input type="text" class="form-control" id="email" placeholder="Enter Email">
+                                        </div>
+                                        <div class="row hidden-xs">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="fullname">Phone</label>
+                                                    <input type="text" class="form-control" id="phone" placeholder="Enter Phone No">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="username">Website</label>
+                                                    <input type="text" class="form-control" id="website" placeholder="Enter Website">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row hidden-xs">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="fullname">Street</label>
+                                                    <input type="text" class="form-control" id="street" placeholder="Enter Street">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="username">City</label>
+                                                    <input type="text" class="form-control" id="city" placeholder="Enter City">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row hidden-xs">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="fullname">State</label>
+                                                    <input type="text" class="form-control" id="state" placeholder="Enter State">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="username">P O Box</label>
+                                                    <input type="text" class="form-control" id="p_o_box" placeholder="Enter P O Box">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Country</label>
+
+                                            <select class="form-control" id="country">
+                                                <% for(var i=0;i<countries.length;i++)
+                                                {
+                                                 %>
+                                                <option value="<%= countries[i]%>"><%= countries[i]%></option>
+                                                <%
+                                                }
+                                                %>
+
+                                            </select>
+
+                                        </div>
+
+                                    </div><!-- /.box-body -->
+
+
+                                </form>
+                            </div><!-- /.box -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" id="submt" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="myModal1" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Confirmation</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>User has successfully been added</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 2.3.0
+        </div>
+        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+    </footer>
+
+
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div><!-- ./wrapper -->
+
+<!-- jQuery 2.1.4 -->
+<script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js" ></script>
+<!-- page script -->
+<script>
+    $(function () {
+        var t=$("#users").DataTable();
+
+
+        $('#adduser').on('click',function(){
+            $("#myModal").modal('show');
+        });
+
+        $('#submt').on('click',function(){
+
+            var comp_name = $('#comp_name').val();
+            var email  = $('#email').val();
+            var phone  = $('#phone').val();
+            var website = $('#website').val();
+            var street  = $('#street').val();
+            var city  = $('#city').val();
+            var state = $('#state').val();
+            var country = $('#country').val();
+            var p_o_box = $('#p_o_box').val();
+
+            if(comp_name=='' || email=='' || phone=='' || website==''|| street==''|| city=='' || state=='' || country=='')
+            {
+                alert('Please fill all the required details');
+            }
+            else
+            {
+                var url = './counterparties/add';
+                var company = {};
+                company.company_name = comp_name;
+                company.email = email;
+                company.phone = phone;
+                company.website = website;
+                company.street = street;
+                company.city = city;
+                company.state = state;
+                company.country = country;
+                company.p_o_box = p_o_box;
+                $.post(url,company,function(data){
+                    console.log(data);
+                    if(data.status==1)
+                    {
+                        $("#myModal").modal('hide');
+                        $("#myModal1").modal('show');
+                    }
+
+                })
+
+            }
+        })
+
+
+
+    });
+</script>
+</body>
+</html>
