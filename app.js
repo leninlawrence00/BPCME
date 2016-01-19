@@ -15,6 +15,8 @@ var mongoose = require('mongoose');
 var config   = require('./config/db.js');
 var contacts = require('./routes/contacts');
 var counterparties = require('./routes/counter_parties');
+var items = require('./routes/items');
+var brands = require('./routes/brands');
 
 require('./config/passport.js')(passport);
 mongoose.connect(config.url,function(){
@@ -42,6 +44,8 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 app.use('/users', users);
 app.use('/contacts',contacts);
 app.use('/counterparties',counterparties);
+app.use('/',items);
+app.use('/brand',brands);
 
 /// catch 404 and forwarding to error handler
 require('./routes/login')(app,passport);
