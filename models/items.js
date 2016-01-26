@@ -11,7 +11,8 @@ var itemSchema = mongoose.Schema({
     part_no : {type:String,required:true,unique:true},
     description: String,
     quantity :Number,
-    unitprice : Number
+    unitprice : Number,
+    qr_code : String
 
 });
 

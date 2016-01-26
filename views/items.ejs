@@ -61,13 +61,13 @@
                     <div class="box box-primary">
 
                         <!-- form start -->
-                        <form role="form">
+                        <form role="form" method="post" action="./add" enctype="multipart/form-data"  >
                             <div class="box-body">
                                 <div class="row ">
                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                         <div class="form-group">
                                             <label for="fullname">Brand : </label>
-                                            <select id="brand" class="form-control" >
+                                            <select id="brand" name="brand_id" class="form-control" >
                                                 <option value="" selected="selected">Please Select the brand</option>
                                                 <% for(var i=0;i<brands.length;i++)
                                                 {
@@ -92,8 +92,15 @@
                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                         <div class="form-group">
                                             <label for="username">Model :</label>
-                                            <select id="model" class="form-control" >
+                                            <select id="model" name="model_id" class="form-control" >
                                                 <option value="" selected="selected">Please Select the Model</option>
+                                                <% for(var i=0;i<models.length;i++)
+                                                {
+                                                %>
+                                                <option value="<%= models[i]._id%>"><%= models[i].model_name %></option>
+                                                <%
+                                                }
+                                                %>
                                             </select>
 
                                         </div>
@@ -101,7 +108,7 @@
                                     <div class="col-sm-2 col-md-2 col-lg-2">
                                         <div class="form-group">
                                             <label for="fullname">Add New </label>
-                                            <button class="btn btn-success" id="btn_add_model"> Add New </button>
+                                            <a class="btn btn-success"  id="btn_add_model"> Add New </a>
 
                                         </div>
                                     </div>
@@ -112,7 +119,7 @@
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <label for="fullname">Part No/Configuration : </label>
-                                            <input type="text" class="form-control" id="phone" placeholder="Enter Part No/Configuration">
+                                            <input type="text" class="form-control" id="part_no" name="part_no" placeholder="Enter Part No/Configuration">
 
                                         </div>
                                     </div>
@@ -120,7 +127,7 @@
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <label for="username">Description : </label>
-                                            <input type="text" class="form-control" id="description" placeholder="Description">
+                                            <input type="text" class="form-control" name="description" id="description" placeholder="Description">
                                         </div>
                                     </div>
 
@@ -129,14 +136,14 @@
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <label for="fullname">Search Keywords</label>
-                                            <input type="text" class="form-control" id="street" placeholder="search keywords">
+                                            <input type="text" class="form-control" name="search_keywords" id="street" placeholder="search keywords">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <label for="username">Opening Quantity :</label>
-                                            <input type="text" class="form-control" id="op_quantity" placeholder="Enter opening Quantity">
+                                            <input type="text" class="form-control" name="quantity" id="op_quantity" placeholder="Enter opening Quantity">
                                         </div>
                                     </div>
 
@@ -145,24 +152,29 @@
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <div class="form-group">
                                             <label for="fullname">Unit Price </label>
-                                            <input type="text" class="form-control" id="street" placeholder="Enter Unit Price">
+                                            <input type="text" class="form-control" name="unitprice" id="street" placeholder="Enter Unit Price">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Known As : </label>
-                                            <input type="text" class="form-control" id="item_code" >
+                                            <label for="exampleInputPassword1">QR Code : </label>
+                                            <input type="file" class="form-control" name="qr_code" id="qr_code" >
                                         </div>
+
                                     </div>
 
 
-                                </div>
 
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Known As : </label>
+                                    <input type="text" class="form-control" name="item_code" id="item_code" >
+                                </div>
 
 
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <button type="button" class="btn btn-success" id="submit">    Submit   </button>
+                                        <button type="submit" class="btn btn-success" id="submit">    Submit   </button>
                                     </div>
 
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -210,6 +222,39 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             <button type="button" id="submt_brand" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add new brand -->
+            <div id="myModal2" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Add New Brand</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="box box-primary">
+
+                                <!-- form start -->
+                                <form role="form">
+                                    <div class="box-body">
+                                        <div class="form-group">
+                                            <label for="fullname"> Model Name : </label>
+                                            <input type="text" class="form-control" id="model_new" placeholder="Enter Model Name">
+                                        </div>
+
+
+                                    </div><!-- /.box-body -->
+
+
+                                </form>
+                            </div><!-- /.box -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" id="submt_model" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
@@ -269,8 +314,39 @@
         $('#btn_add_brand').on('click',function(){
             $("#myModal").modal('show');
         });
+        $('#btn_add_model').on('click',function(){
+            $("#myModal2").modal('show');
+        });
+
+
+        $('#submt_model').on('click',function(){
+           var model = $('#model_new').val();
+            if(model=='')
+            {
+                alert('Model name should not be blank');
+            }
+            else
+            {
+
+                $.post("./model/addmodel",{model_name:model},function(data){
+
+                    console.log(data);
+                    if(data.status=1)
+                    {
+                        $("#myModal2").modal('hide');
+                        $("#myModal1").modal('show');
+
+                        var option = new Option(data.model.model_name, data.model._id);
+                        $('#model').append($(option));
+                    }
+
+                });
+            }
+        });
+
+
         $('#submt_brand').on('click',function(){
-           var brand = $('#brand_new').val();
+            var brand = $('#brand_new').val();
             if(brand=='')
             {
                 alert('Brand name should not be blank');
@@ -293,38 +369,37 @@
                 });
             }
         });
-        /*
-        $('#brand').onSelect(function(){
+
+        $('#brand').on('change',function(){
+
             item_code_create();
         });
 
-        $('#model').onSelect(function(){
+
+
+        $('#model').on('change',function(){
+            alert("Hello world");
             item_code_create();
         });
 
-        $('#part_no').onkeyup(function(){
+        $('#part_no').keyup(function(){
             item_code_create();
         });
 
-        $('#btn_add_brand').on('click',function(){
-             alert('Hello world');
-            //$("#myModal").modal('show');
-        });
 
-        $('#btn_add_brand').on('click',function(){
-            $("#myModal").modal('show');
-        });
+
 
         $('#submit').on('click',function(){
 
-        });*/
+        });
     });
-    function item_code_create()
+   function item_code_create()
     {
-       var brand=$( "#brand option:selected" ).text();
-       var model=$( "#model option:selected" ).text();
-       var part_no = $('#part_no').val();
-       $('#knownas').val('brand+model+part_no');
+
+        var brand=$( "#brand option:selected" ).text();
+        var model=$( "#model option:selected" ).text();
+        var part_no = $('#part_no').val();
+        $('#item_code').val(brand+'/'+model+'/'+part_no);
     }
 
 </script>
